@@ -68,7 +68,7 @@ namespace cctalk
 
         private void serialPort1_DataReceived(object sender, SerialDataReceivedEventArgs e)
         {
-
+            sa
         }
     }
 }
