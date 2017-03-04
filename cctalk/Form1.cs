@@ -154,5 +154,10 @@ namespace cctalk
         {
             label1.Text = "Value: " + trackBar1.Value;
         }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Text = "";
+        }
     }
 }
