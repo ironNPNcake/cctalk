@@ -18,6 +18,7 @@ namespace cctalk
         private char[] data = new char[200000];
         private string[] output = new string[256];
         private byte[] outputByte = new byte[256];
+        string[] tab = new string[10000]; //array for rewrite vallues in richtextbox to HEX DEC ASCII
 
         public Form1()
         {
@@ -100,6 +101,8 @@ namespace cctalk
 
         }
 
+        //---------------------------Reading-------------------
+
         private void DisplayText_temp(object sender, EventArgs e)
         {
             for (int i = 0; i < incrementor; i++)
@@ -116,6 +119,12 @@ namespace cctalk
                     else
                         richTextBox1.Text += Convert.ToInt64(data[i]).ToString("X2") + ' ';
                 }
+                else if(radioButtonDEC.Checked)
+                {
+                    richTextBox1.Text += Convert.ToInt32(data[i]);
+                    richTextBox1.Text += ' ';
+                }
+
                 if(checkBoxFormat.Checked)
                 {
                     if (i % trackBar1.Value == 0)
@@ -130,16 +139,18 @@ namespace cctalk
             //textBox1.Text += st;
         }
 
+        //---------------------------------Sending---------------------------
+
         private void sendButton_Click(object sender, EventArgs e)
         {
             try
             {
-                if(radioButtonAsciiSend.Checked)
+                if (radioButtonAsciiSend.Checked)
                     serialPort1.Write(textBoxToSend.Text.ToString());
-                else if(radioButton2.Checked)
+                else if (radioButton2.Checked)
                 {
                     output = textBoxToSend.Text.Split(' ');
-                    for(int i =0;i< output.Length;i++)
+                    for (int i = 0; i < output.Length; i++)
                     {
                         outputByte[i] = Convert.ToByte(output[i]);
                     }
@@ -174,6 +185,54 @@ namespace cctalk
         private void button1_Click(object sender, EventArgs e)
         {
             richTextBox1.Text = "";
+        }
+
+        private void radioButtonDEC_CheckedChanged(object sender, EventArgs e)
+        {
+            if(radioButtonDEC.Checked)
+            {
+                tab = richTextBox1.Text.Split(' ');
+                 
+                for(int i =0; i<tab.Length;i++)
+                { 
+                    byte hexValue = byte.Parse(tab[i],System.Globalization.NumberStyles.HexNumber);
+                    tab[i] = hexValue.ToString("D");
+                }
+                richTextBox1.Text = "";
+                for(int i =0;i<tab.Length;i++)
+                {
+                    richTextBox1.Text += tab[i];
+                    if (tab.Length - i > 1) richTextBox1.Text += " ";
+                }
+                Array.Clear(tab, 0, tab.Length);
+            }
+        }
+
+        private void radioButtonHex_CheckedChanged(object sender, EventArgs e)
+        {
+            if(radioButtonHex.Checked)
+            {
+                checkBox0X.Enabled = true;
+                tab = richTextBox1.Text.Split(' ');
+
+                for (int i = 0; i < tab.Length; i++)
+                {
+                    int decValue = int.Parse(tab[i]);
+                    tab[i] = decValue.ToString("X");
+                }
+                richTextBox1.Text = "";
+                for (int i = 0; i < tab.Length; i++)
+                {
+                    richTextBox1.Text += tab[i];
+                    if (tab.Length - i > 1) richTextBox1.Text += " ";
+                }
+                Array.Clear(tab, 0, tab.Length);
+            }
+            else
+            {
+                checkBox0X.Checked = false;
+                checkBox0X.Enabled = false;
+            }
         }
     }
 }

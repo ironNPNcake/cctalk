@@ -46,6 +46,7 @@
             this.radioButtonAsciiSend = new System.Windows.Forms.RadioButton();
             this.radioButton2 = new System.Windows.Forms.RadioButton();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.radioButtonDEC = new System.Windows.Forms.RadioButton();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).BeginInit();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
@@ -115,6 +116,7 @@
             this.radioButtonHex.TabStop = true;
             this.radioButtonHex.Text = "HEX";
             this.radioButtonHex.UseVisualStyleBackColor = true;
+            this.radioButtonHex.CheckedChanged += new System.EventHandler(this.radioButtonHex_CheckedChanged);
             // 
             // textBoxToSend
             // 
@@ -209,13 +211,26 @@
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.radioButtonDEC);
             this.panel1.Controls.Add(this.radioButtonAscii);
             this.panel1.Controls.Add(this.radioButtonHex);
             this.panel1.Controls.Add(this.checkBox0X);
             this.panel1.Location = new System.Drawing.Point(301, 9);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(200, 26);
+            this.panel1.Size = new System.Drawing.Size(316, 26);
             this.panel1.TabIndex = 15;
+            // 
+            // radioButtonDEC
+            // 
+            this.radioButtonDEC.AutoSize = true;
+            this.radioButtonDEC.Location = new System.Drawing.Point(193, 6);
+            this.radioButtonDEC.Name = "radioButtonDEC";
+            this.radioButtonDEC.Size = new System.Drawing.Size(47, 17);
+            this.radioButtonDEC.TabIndex = 9;
+            this.radioButtonDEC.TabStop = true;
+            this.radioButtonDEC.Text = "DEC";
+            this.radioButtonDEC.UseVisualStyleBackColor = true;
+            this.radioButtonDEC.CheckedChanged += new System.EventHandler(this.radioButtonDEC_CheckedChanged);
             // 
             // Form1
             // 
@@ -265,6 +280,7 @@
         private System.Windows.Forms.RadioButton radioButtonAsciiSend;
         private System.Windows.Forms.RadioButton radioButton2;
         private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.RadioButton radioButtonDEC;
     }
 }
 
