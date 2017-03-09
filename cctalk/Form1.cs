@@ -16,10 +16,13 @@ namespace cctalk
 
         private int incrementor;
         private char[] data = new char[200000];
+        private string[] output = new string[256];
+        private byte[] outputByte = new byte[256];
 
         public Form1()
         {
             InitializeComponent();
+            serialPort1.Encoding = Encoding.GetEncoding(28591);
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -131,7 +134,20 @@ namespace cctalk
         {
             try
             {
-                serialPort1.WriteLine(textBoxToSend.Text.ToString());
+                if(radioButtonAsciiSend.Checked)
+                    serialPort1.Write(textBoxToSend.Text.ToString());
+                else if(radioButton2.Checked)
+                {
+                    output = textBoxToSend.Text.Split(' ');
+                    for(int i =0;i< output.Length;i++)
+                    {
+                        outputByte[i] = Convert.ToByte(output[i]);
+                    }
+                    serialPort1.Write(outputByte, 0, output.Length);
+                    Array.Clear(output, 0, output.Length);
+                    Array.Clear(outputByte, 0, outputByte.Length);
+                }
+                textBoxToSend.Text = "";
             }
             catch(Exception ex)
             {

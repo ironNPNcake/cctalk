@@ -43,7 +43,11 @@
             this.label1 = new System.Windows.Forms.Label();
             this.checkBoxFormat = new System.Windows.Forms.CheckBox();
             this.button1 = new System.Windows.Forms.Button();
+            this.radioButtonAsciiSend = new System.Windows.Forms.RadioButton();
+            this.radioButton2 = new System.Windows.Forms.RadioButton();
+            this.panel1 = new System.Windows.Forms.Panel();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).BeginInit();
+            this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // serialPort1
@@ -93,7 +97,7 @@
             // radioButtonAscii
             // 
             this.radioButtonAscii.AutoSize = true;
-            this.radioButtonAscii.Location = new System.Drawing.Point(319, 12);
+            this.radioButtonAscii.Location = new System.Drawing.Point(3, 6);
             this.radioButtonAscii.Name = "radioButtonAscii";
             this.radioButtonAscii.Size = new System.Drawing.Size(52, 17);
             this.radioButtonAscii.TabIndex = 4;
@@ -104,7 +108,7 @@
             // 
             this.radioButtonHex.AutoSize = true;
             this.radioButtonHex.Checked = true;
-            this.radioButtonHex.Location = new System.Drawing.Point(377, 12);
+            this.radioButtonHex.Location = new System.Drawing.Point(61, 6);
             this.radioButtonHex.Name = "radioButtonHex";
             this.radioButtonHex.Size = new System.Drawing.Size(47, 17);
             this.radioButtonHex.TabIndex = 5;
@@ -134,7 +138,7 @@
             // checkBox0X
             // 
             this.checkBox0X.AutoSize = true;
-            this.checkBox0X.Location = new System.Drawing.Point(430, 12);
+            this.checkBox0X.Location = new System.Drawing.Point(114, 6);
             this.checkBox0X.Name = "checkBox0X";
             this.checkBox0X.Size = new System.Drawing.Size(73, 17);
             this.checkBox0X.TabIndex = 8;
@@ -181,20 +185,52 @@
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
+            // radioButtonAsciiSend
+            // 
+            this.radioButtonAsciiSend.AutoSize = true;
+            this.radioButtonAsciiSend.Location = new System.Drawing.Point(646, 422);
+            this.radioButtonAsciiSend.Name = "radioButtonAsciiSend";
+            this.radioButtonAsciiSend.Size = new System.Drawing.Size(52, 17);
+            this.radioButtonAsciiSend.TabIndex = 13;
+            this.radioButtonAsciiSend.Text = "ASCII";
+            this.radioButtonAsciiSend.UseVisualStyleBackColor = true;
+            // 
+            // radioButton2
+            // 
+            this.radioButton2.AutoSize = true;
+            this.radioButton2.Checked = true;
+            this.radioButton2.Location = new System.Drawing.Point(646, 445);
+            this.radioButton2.Name = "radioButton2";
+            this.radioButton2.Size = new System.Drawing.Size(47, 17);
+            this.radioButton2.TabIndex = 14;
+            this.radioButton2.TabStop = true;
+            this.radioButton2.Text = "DEC";
+            this.radioButton2.UseVisualStyleBackColor = true;
+            // 
+            // panel1
+            // 
+            this.panel1.Controls.Add(this.radioButtonAscii);
+            this.panel1.Controls.Add(this.radioButtonHex);
+            this.panel1.Controls.Add(this.checkBox0X);
+            this.panel1.Location = new System.Drawing.Point(301, 9);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(200, 26);
+            this.panel1.TabIndex = 15;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(762, 576);
+            this.Controls.Add(this.panel1);
+            this.Controls.Add(this.radioButton2);
+            this.Controls.Add(this.radioButtonAsciiSend);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.checkBoxFormat);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.trackBar1);
-            this.Controls.Add(this.checkBox0X);
             this.Controls.Add(this.sendButton);
             this.Controls.Add(this.textBoxToSend);
-            this.Controls.Add(this.radioButtonHex);
-            this.Controls.Add(this.radioButtonAscii);
             this.Controls.Add(this.richTextBox1);
             this.Controls.Add(this.closePortButton);
             this.Controls.Add(this.openPortButton);
@@ -203,6 +239,8 @@
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).EndInit();
+            this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -224,6 +262,9 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.CheckBox checkBoxFormat;
         private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.RadioButton radioButtonAsciiSend;
+        private System.Windows.Forms.RadioButton radioButton2;
+        private System.Windows.Forms.Panel panel1;
     }
 }
 
