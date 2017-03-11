@@ -19,6 +19,7 @@ namespace cctalk
         private string[] output = new string[256];
         private byte[] outputByte = new byte[256];
         string[] tab = new string[10000]; //array for rewrite vallues in richtextbox to HEX DEC ASCII
+        List<int> sended = new List<int>();
 
         public Form1()
         {
@@ -107,6 +108,23 @@ namespace cctalk
         {
             for (int i = 0; i < incrementor; i++)
             {
+                if (sended.Count != 0)
+                {
+                    for (int j = 0; j < sended.Count; j++)
+                    {
+                        if (Convert.ToInt16(data[i]) == sended[j])
+                        {
+                            sended.RemoveAt(j);
+                            //richTextBox1.SelectionStart = richTextBox1.Text.Length;
+
+                           // richTextBox1.SelectionColor = Color.Red;
+                            break;
+                        }
+                    }
+                     continue;
+                }
+                /*else
+                    richTextBox1.SelectionColor = Color.Black;*/
                 if (radioButtonAscii.Checked)
                 {
                     richTextBox1.Text += data[i];
@@ -130,6 +148,8 @@ namespace cctalk
                     if (i % trackBar1.Value == 0)
                         richTextBox1.Text += '\n';
                 }
+                richTextBox1.SelectionStart = richTextBox1.Text.Length;
+                richTextBox1.SelectionLength = 1;
             }
             if(!checkBoxFormat.Checked)
                 richTextBox1.Text+=('\n');
@@ -153,6 +173,7 @@ namespace cctalk
                     for (int i = 0; i < output.Length; i++)
                     {
                         outputByte[i] = Convert.ToByte(output[i]);
+                        sended.Add( Convert.ToInt16(output[i]));
                     }
                     serialPort1.Write(outputByte, 0, output.Length);
                     Array.Clear(output, 0, output.Length);
@@ -189,14 +210,17 @@ namespace cctalk
 
         private void radioButtonDEC_CheckedChanged(object sender, EventArgs e)
         {
-            if(radioButtonDEC.Checked)
+            if(radioButtonDEC.Checked&&richTextBox1.Text.Length>0)
             {
                 tab = richTextBox1.Text.Split(' ');
                  
                 for(int i =0; i<tab.Length;i++)
-                { 
-                    byte hexValue = byte.Parse(tab[i],System.Globalization.NumberStyles.HexNumber);
-                    tab[i] = hexValue.ToString("D");
+                {
+                    if (tab[i] != " "&&tab[i]!="\n")
+                    {
+                        byte hexValue = byte.Parse(tab[i], System.Globalization.NumberStyles.HexNumber);
+                        tab[i] = hexValue.ToString("D");
+                    }
                 }
                 richTextBox1.Text = "";
                 for(int i =0;i<tab.Length;i++)
@@ -217,8 +241,11 @@ namespace cctalk
 
                 for (int i = 0; i < tab.Length; i++)
                 {
-                    int decValue = int.Parse(tab[i]);
-                    tab[i] = decValue.ToString("X");
+                    if (tab[i] != " " && tab[i] != "\n")
+                    {
+                        int decValue = int.Parse(tab[i]);
+                        tab[i] = decValue.ToString("X");
+                    }
                 }
                 richTextBox1.Text = "";
                 for (int i = 0; i < tab.Length; i++)
